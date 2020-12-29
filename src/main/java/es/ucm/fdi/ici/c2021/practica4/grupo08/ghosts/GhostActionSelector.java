@@ -10,8 +10,10 @@ import pacman.game.Constants.GHOST;
 
 public class GhostActionSelector implements ActionSelector {
 
-	private final Double RUN_AWAY_LIMIT = 12.0; //TODO Hay que mirar bien este
+	private final Double NERVIOUS = 12.0; //TODO Hay que mirar bien este
+	private final Double EMERGENCY = 24.0;
 	private final Double EAT_LIMIT = 10.0;
+	
 	GHOST g;
 	
 	GhostActionSelector(GHOST g){
@@ -23,16 +25,25 @@ public class GhostActionSelector implements ActionSelector {
 		Double runAway = fuzzyOutput.get("runAway");
 		Double attack  = fuzzyOutput.get("attack");
 		
-		System.out.println("Attack: " + attack);
-		System.out.println("Run: " + runAway);
+		//		System.out.println();
+		//		System.out.println("Attack: " + attack);
+		//		System.out.println("Run: " + runAway);
 		
+		if(runAway > EMERGENCY) {
+			System.out.println(g.name()+" RUN FOREST RUN");
+			return new ActionHuirPacmanAcercarte(g);
+		}
 		
-		if(attack > EAT_LIMIT)
+		if(attack > EAT_LIMIT) {
+			System.out.println(g.name()+" ATTACK");
 			return new ActionAtacarPacman(g);
+		}
+		if (runAway > NERVIOUS) {
+			System.out.println(g.name()+" BE CAREFUL");
+			return new ActionHuirPacmanAcercarte(g);
+		}
 		
-		if (g == GHOST.BLINKY) System.out.println(g.name() + " HUIR");
-		if (runAway > RUN_AWAY_LIMIT) return new ActionHuirPacmanAcercarte(g);
-		
+		System.out.println(g.name()+" GET CLOSER");
 		return new ActionHuirPacmanAcercarte(g);
 	}
 

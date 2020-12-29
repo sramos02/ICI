@@ -41,6 +41,11 @@ FUZZIFY PacmanDistance
 	TERM far := (50, 0) (90, 1) (300, 1);
 END_FUZZIFY
 
+	//TERM overlap := (-1,1)(0,0);
+	//TERM near := (5,0)(10,1) (35, 0) ;
+	//TERM medium := gauss 50 5;
+	//TERM far := (50, 0) (90, 1) (300, 1);
+
 FUZZIFY GhostConfidence	
 	TERM low := (25,1)(50,0) ; 
 	TERM medium := gauss 50 25;
@@ -84,18 +89,20 @@ RULEBLOCK GhostRules
 	RULE 9 : IF GhostEdibleTime IS soon THEN attack IS excellent;
 	
 	//Huir
-	RULE 1 : IF PacmanNPPdistance IS far THEN runAway IS calm;
-	RULE 2 : IF PacmanNPPdistance IS medium THEN runAway IS calm;
-	RULE 3 : IF PacmanNPPdistance IS near THEN runAway IS emergency;
+	RULE 10 : IF PacmanNPPdistance IS far THEN runAway IS calm;
+	RULE 11 : IF PacmanNPPdistance IS medium THEN runAway IS calm;
+	RULE 12 : IF PacmanNPPdistance IS near THEN runAway IS emergency;
 	
-	RULE 4 : IF PacmanNPPdistance IS near THEN runAway IS emergency;
-	RULE 5 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS near THEN runAway IS calm;
-	RULE 6 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS medium THEN runAway IS nervious;
-	RULE 7 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS medium THEN runAway IS emergency;
+	RULE 13 : IF PacmanNPPdistance IS near THEN runAway IS emergency;
+	RULE 14 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS near THEN runAway IS calm;
+	RULE 15 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS medium THEN runAway IS nervious;
+	RULE 16 : IF PacmanNPPdistance IS NOT near AND PacmanDistance IS medium THEN runAway IS emergency;
 	
-	RULE 8 : IF GhostEdibleTime IS NOT soon THEN runAway IS emergency;
-	RULE 9 : IF GhostEdibleTime IS soon THEN runAway IS calm;
+	RULE 17 : IF GhostEdibleTime IS NOT soon THEN runAway IS emergency;
+	RULE 18 : IF GhostEdibleTime IS soon THEN runAway IS calm;
 	
+	//RULE 10 : IF PacmanDistance IS overlap THEN runAway IS calm; //Si está muy cerca de pacman, lo mejor es pegarse a el
+	//RULE 11 : IF PacmanDistance IS overlap THEN attack IS excellent;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

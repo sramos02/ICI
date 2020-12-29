@@ -33,6 +33,9 @@ public class GhostInput implements Input {
 			ghostNPPdistance =  game.getDistance(ghostPos, pacmanNpp, DM.PATH);	
 			pacmanDistance = game.getDistance(pacmanPos, ghostPos, DM.PATH);
 			ghostConfidence = 100;
+
+			//Esto pretende devolver -1 cuando el fantasma esté pegado a la espalda de pacman
+			//if(pacmanDistance < 5 && game.getPacmanLastMoveMade() == game.getGhostLastMoveMade(g)) pacmanDistance = -1; 
 			
 			if(game.getGhostLairTime(g) == 0 && game.isGhostEdible(g)) 
 				edibleTime = game.getGhostEdibleTime(g);		
