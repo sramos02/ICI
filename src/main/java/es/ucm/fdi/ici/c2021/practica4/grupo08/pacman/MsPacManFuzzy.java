@@ -4,10 +4,7 @@ import java.util.HashMap;
 
 import es.ucm.fdi.ici.fuzzy.ActionSelector;
 import es.ucm.fdi.ici.fuzzy.FuzzyEngine;
-import es.ucm.fdi.ici.fuzzy.observers.ConsoleFuzzyEngineObserver;
 import pacman.controllers.PacmanController;
-import pacman.game.Constants.DM;
-import pacman.game.Constants.GHOST;
 import pacman.game.Constants.MOVE;
 import pacman.game.Game;
 
@@ -20,10 +17,10 @@ public class MsPacManFuzzy extends PacmanController {
 	public MsPacManFuzzy()
 	{
 		ActionSelector actionSelector = new MsPacManActionSelector();
-		 input = new MsPacmanInput();
+		input = new MsPacmanInput();
 		 
-		//ConsoleFuzzyEngineObserver observer = new ConsoleFuzzyEngineObserver("MsPacman","MsPacmanRules");
 		fuzzyEngine = new FuzzyEngine("MsPacman", RULES_PATH, "MsPacmanFuzzy", actionSelector);
+		//ConsoleFuzzyEngineObserver observer = new ConsoleFuzzyEngineObserver("MsPacman","MsPacmanRules");
 		//fuzzyEngine.addObserver(observer);
 	}
 	
@@ -31,6 +28,7 @@ public class MsPacManFuzzy extends PacmanController {
 	@Override
 	public MOVE getMove(Game game, long timeDue) {			
 		input.parseInput(game);
+		
 		HashMap<String, Double> values = input.getFuzzyValues();
 		return fuzzyEngine.run(values, game);
 	}

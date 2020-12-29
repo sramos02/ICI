@@ -10,7 +10,7 @@ import pacman.game.Game;
 
 public class MsPacmanInput implements Input {
 
-	double[] ghostDistance = {50,50,50,50};
+	double[] ghostDistance = {108,108,108,108};
 	double[] ghostNPPdistance = {84,84,84,84};
 	double[] ghostEdibleTime = {0,0,0,0};
 	double[] pacmanConfidence = {100,100,100,100};
@@ -20,8 +20,8 @@ public class MsPacmanInput implements Input {
 	
 	@Override
 	public void parseInput(Game game) {
-		
 		int pacmanPos = game.getPacmanCurrentNodeIndex();
+		
 		int pacmanNpp = getNPP(pacmanPos, game);
 		msPacmanNPPdistance = game.getDistance(pacmanPos, pacmanNpp, DM.PATH);
 		
@@ -29,7 +29,7 @@ public class MsPacmanInput implements Input {
 			int index = g.ordinal();
 			int ghostPos = game.getGhostCurrentNodeIndex(g);
 
-			if(ghostPos != -1) { //No sabe donde está
+			if(ghostPos != -1) { //Posición invalida
 				double distance = game.getDistance(game.getPacmanCurrentNodeIndex(), ghostPos, DM.PATH);
 				if(distance != -1) { //Esta muerto
 					pacmanConfidence[index] = 100;
@@ -49,7 +49,7 @@ public class MsPacmanInput implements Input {
 		double bestDistance = Integer.MAX_VALUE;
 		int ret = -1;
 		
-		for(int index : game.getActivePowerPillsIndices()) {
+		for(int index : game.getPowerPillIndices()) {
 			double actDistance = game.getDistance(from, index, DM.PATH);	
 			if(actDistance < bestDistance) {
 				bestDistance = actDistance;
@@ -59,7 +59,7 @@ public class MsPacmanInput implements Input {
 
 		return ret;
 	}
-
+	
 	@Override
 	public HashMap<String, Double> getFuzzyValues() {
 		HashMap<String,Double> vars = new HashMap<String,Double>();
