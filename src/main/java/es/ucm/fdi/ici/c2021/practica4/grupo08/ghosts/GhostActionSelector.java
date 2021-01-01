@@ -25,25 +25,25 @@ public class GhostActionSelector implements ActionSelector {
 		Double runAway = fuzzyOutput.get("runAway");
 		Double attack  = fuzzyOutput.get("attack");
 		
-		//		System.out.println();
-		//		System.out.println("Attack: " + attack);
-		//		System.out.println("Run: " + runAway);
+//		System.out.println();
+//		System.out.println("Attack: " + attack);
+//		System.out.println("Run: " + runAway);
 		
 		if(runAway > EMERGENCY) {
-			System.out.println(g.name()+" RUN FOREST RUN");
+			//System.out.println(g.name()+" RUN FOREST RUN");
 			return new ActionHuirPacmanAcercarte(g);
 		}
 		
 		if(attack > EAT_LIMIT) {
-			System.out.println(g.name()+" ATTACK");
+			//System.out.println(g.name()+" ATTACK");
 			return new ActionAtacarPacman(g);
 		}
 		if (runAway > NERVIOUS) {
-			System.out.println(g.name()+" BE CAREFUL");
+			//System.out.println(g.name()+" BE CAREFUL");
 			return new ActionHuirPacmanAcercarte(g);
 		}
 		
-		System.out.println(g.name()+" GET CLOSER");
+		//System.out.println(g.name()+" GET CLOSER");
 		return new ActionHuirPacmanAcercarte(g);
 	}
 

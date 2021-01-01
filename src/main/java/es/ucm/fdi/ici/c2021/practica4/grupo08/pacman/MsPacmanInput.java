@@ -40,7 +40,7 @@ public class MsPacmanInput implements Input {
 			} 
 			else { 
 				if (pacmanConfidence[index] > 0) pacmanConfidence[index]-=.1;
-				if (ghostEdibleTime[index] > 0) ghostEdibleTime[index]-=1;
+				if (ghostEdibleTime[index] > 0) ghostEdibleTime[index]-=.1;
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class MsPacmanInput implements Input {
 		double bestDistance = Integer.MAX_VALUE;
 		int ret = -1;
 		
-		for(int index : game.getPowerPillIndices()) {
+		for(int index : game.getPowerPillIndices()) { //No se pueden ver las active, mejor esto que nada
 			double actDistance = game.getDistance(from, index, DM.PATH);	
 			if(actDistance < bestDistance) {
 				bestDistance = actDistance;
