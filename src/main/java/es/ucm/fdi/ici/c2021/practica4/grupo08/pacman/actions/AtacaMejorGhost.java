@@ -23,7 +23,12 @@ public class AtacaMejorGhost implements Action{
 			}
 		}
 		
-		return game.getApproximateNextMoveTowardsTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(closestGhost), game.getPacmanLastMoveMade(), Constants.DM.PATH);
+		System.out.println(game.getPacmanCurrentNodeIndex());
+		System.out.println(game.getGhostCurrentNodeIndex(closestGhost));
+		System.out.println();
+		
+		MOVE ret =  game.getApproximateNextMoveTowardsTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(closestGhost), game.getPacmanLastMoveMade(), Constants.DM.PATH);
+		return ret;
 	}
 
 }

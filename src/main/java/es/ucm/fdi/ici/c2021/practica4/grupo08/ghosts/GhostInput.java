@@ -49,7 +49,7 @@ public class GhostInput implements Input {
 	}
 
 
-
+	//Aquí no se puede llevar el control de que powerpill se ha comido, no podemos ver cual se come
 	private int getNPP(int from, Game game) {
 		double bestDistance = Integer.MAX_VALUE;
 		int ret = -1;

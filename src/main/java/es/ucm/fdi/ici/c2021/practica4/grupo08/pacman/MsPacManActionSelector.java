@@ -11,8 +11,8 @@ import es.ucm.fdi.ici.fuzzy.ActionSelector;
 
 public class MsPacManActionSelector implements ActionSelector {
 
-	private final Double RUN_AWAY_LIMIT = 14.97;
-	private final Double EAT_LIMIT = 50.0;
+	private final Double RUN_AWAY_LIMIT = 14.0;
+	private final Double EAT_LIMIT = 14.0;
 	private final Double EAT_POWERPILL = 50.0;
 	
 	@Override
@@ -25,25 +25,25 @@ public class MsPacManActionSelector implements ActionSelector {
 		
 		Double eatPP = fuzzyOutput.get("eatPowerPill");
 
-		System.out.println();
+//		System.out.println();
 		System.out.println("BLINKYattack: " + eatBlinky);
 		System.out.println("PINKYattack: " + eatPinky);
 		System.out.println("INKYattack: " + eatInky);
 		System.out.println("SUEattack: " + eatSue);
-		System.out.println("PPattack: " + eatPP);
-		System.out.println("Run: " + runAway);
-		
+//		System.out.println("PPattack: " + eatPP);
+//		System.out.println("Run: " + runAway);
+	
 		
 		if(runAway> this.RUN_AWAY_LIMIT) 
 			return new ActionHuir();
 		
 		if(eatBlinky > EAT_LIMIT || eatPinky > EAT_LIMIT 
 				|| eatInky > EAT_LIMIT || eatSue > EAT_LIMIT) 
-			new AtacaMejorGhost();
+			return new AtacaMejorGhost();
 		
 		if (eatPP > EAT_POWERPILL) 
 			return new ActionComerPP();
-		
+	
 		return new ActionComerPill();
 	}
 
